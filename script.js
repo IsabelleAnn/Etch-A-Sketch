@@ -3,24 +3,14 @@ const containerSideLength = 600;
 container.style.height = `${containerSideLength}px`;
 container.style.width = `${containerSideLength}px`;
 
-let pixelsPerSide = parseInt(prompt('Please enter amount of pixels per side. Max = 100'));
-const maximumPixels = 100;
+//Initial drawing board:
+generateDrawingBoard(16);
 
-while (!checkIfBelowMax(pixelsPerSide, maximumPixels)) {
-    pixelsPerSide = parseInt(prompt('Too many pixels. Please renter amount of pixels per side. Max = 100'));
-}
-
-function checkIfBelowMax(num, max) {
-    if (num <= max) {
-        return true;
-    } else return false;
-}
-
-let pixelLength = containerSideLength / pixelsPerSide;
-
-function generateDrawingBoard() {
+function generateDrawingBoard(pixelsPerSide) {
+    let pixelLength = containerSideLength / pixelsPerSide;
     for (let i = 0; i < pixelsPerSide; i++) {
         const subContainer = document.createElement('div');
+        subContainer.classList.add('subContainer');
         container.appendChild(subContainer);
         subContainer.style.display = 'flex';
         for (let j = 0; j < pixelsPerSide; j++) {
@@ -33,5 +23,30 @@ function generateDrawingBoard() {
         }
     }
 }
+//User resets drawing board:
+const resetBtn = document.querySelector('#reset-btn');
+resetBtn.addEventListener('click', () => {
+    removeChildren(container);
+    generateDrawingBoard(getNumInputBelowMax());
+});
 
-generateDrawingBoard();
+function removeChildren(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.lastChild);
+    }
+}
+
+function getNumInputBelowMax() {
+    let numInput = parseInt(prompt('Please enter amount of pixels per side. Max = 100'));
+    const maxInput = 100;
+    while (!checkIfBelowMax(numInput, maxInput)) {
+        numInput = parseInt(prompt('Too many pixels. Please renter amount of pixels per side. Max = 100'));
+    }
+    return numInput;
+}
+
+function checkIfBelowMax(num, max) {
+    if (num <= max) {
+        return true;
+    } else return false;
+}
