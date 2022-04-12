@@ -3,8 +3,9 @@ const containerSideLength = 600;
 container.style.height = `${containerSideLength}px`;
 container.style.width = `${containerSideLength}px`;
 
-//Initial drawing board:
+//Initial drawing board: ---------------------------------------------------------------------------
 generateDrawingBoard(16);
+colorBoardEvent();
 
 function generateDrawingBoard(pixelsPerSide) {
     let pixelLength = containerSideLength / pixelsPerSide;
@@ -23,11 +24,14 @@ function generateDrawingBoard(pixelsPerSide) {
         }
     }
 }
-//User resets drawing board:
+
+
+//User resets drawing board: --------------------------------------------------------------------
 const resetBtn = document.querySelector('#reset-btn');
 resetBtn.addEventListener('click', () => {
     removeChildren(container);
     generateDrawingBoard(getNumInputBelowMax());
+    colorBoardEvent();
 });
 
 function removeChildren(parent) {
@@ -50,3 +54,24 @@ function checkIfBelowMax(num, max) {
         return true;
     } else return false;
 }
+
+//Coloring Board Options: ------------------------------------------------------------------------------------------
+function colorBoardEvent() {
+    const pixels = [...document.getElementsByClassName('pixel')];
+    console.log(pixels);
+
+    pixels.forEach(function(pixel) {
+        pixel.addEventListener('mouseenter', function(event) {
+            console.log(event.target);
+            pixel.style.backgroundColor = 'black';
+        });
+    });
+}
+
+//color picker - default black
+
+//random color Red: #fe5b63 Pink: #ff7cbb Yellow: #ffdb7c Green: #5bf495 Blue: #80b4ff Purple: #a580ff Gray: #5e5858
+
+//lighten
+
+//darken
