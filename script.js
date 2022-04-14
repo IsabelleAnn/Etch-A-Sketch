@@ -2,10 +2,30 @@ const container = document.querySelector('#box-container');
 const containerSideLength = 600;
 container.style.height = `${containerSideLength}px`;
 container.style.width = `${containerSideLength}px`;
+let defaultColor = 'black';
+let currentColor = defaultColor;
+const gridSizeRange = document.querySelector('#grid-size');
+let gridSizeText = document.querySelector('#grid-size-text');
+let gridSizeRangeValue = gridSizeRange.value;
 
-//Initial drawing board: ---------------------------------------------------------------------------
-generateDrawingBoard(16);
-colorBoardEvent();
+//Initial drawing board creation: ---------------------------------------------------------------------------
+generateDrawingBoard(gridSizeRangeValue);
+let pixels = [...document.getElementsByClassName('pixel')];
+pixels.forEach(function(pixel) {
+    pixel.addEventListener('mouseenter', () => {
+        if (random) {
+            pixel.style.filter = `brightness(100%)`;
+            pixel.style.backgroundColor = getRandomRGBColor();;
+        } else if (darken) {
+            pixel.style.filter = `brightness(70%)`;
+        } else if (lighten) {
+            pixel.style.filter = `brightness(130%)`;
+        } else {
+            pixel.style.filter = `brightness(100%)`;
+            pixel.style.backgroundColor = currentColor;
+        }
+    });
+});
 
 function generateDrawingBoard(pixelsPerSide) {
     let pixelLength = containerSideLength / pixelsPerSide;
@@ -25,13 +45,30 @@ function generateDrawingBoard(pixelsPerSide) {
     }
 }
 
-
-//User resets drawing board: --------------------------------------------------------------------
-const resetBtn = document.querySelector('#reset-btn');
-resetBtn.addEventListener('click', () => {
+//----------Resizes Drawing Board-------------------------------------------
+gridSizeRange.addEventListener('change', () => {
+    gridSizeRangeValue = gridSizeRange.value;
+    gridSizeText.textContent = `${gridSizeRangeValue} X ${gridSizeRangeValue}`;
+    currentColor = defaultColor;
+    colorPickerBtn.value = '#000000';
     removeChildren(container);
-    generateDrawingBoard(getNumInputBelowMax());
-    colorBoardEvent();
+    generateDrawingBoard(gridSizeRangeValue);
+    pixels = [...document.getElementsByClassName('pixel')];
+    pixels.forEach(function(pixel) {
+        pixel.addEventListener('mouseenter', () => {
+            if (random) {
+                pixel.style.filter = `brightness(100%)`;
+                pixel.style.backgroundColor = getRandomRGBColor();;
+            } else if (darken) {
+                pixel.style.filter = `brightness(70%)`;
+            } else if (lighten) {
+                pixel.style.filter = `brightness(130%)`;
+            } else {
+                pixel.style.filter = `brightness(100%)`;
+                pixel.style.backgroundColor = currentColor;
+            }
+        });
+    });
 });
 
 function removeChildren(parent) {
@@ -40,38 +77,55 @@ function removeChildren(parent) {
     }
 }
 
-function getNumInputBelowMax() {
-    let numInput = parseInt(prompt('Please enter amount of pixels per side. Max = 100'));
-    const maxInput = 100;
-    while (!checkIfBelowMax(numInput, maxInput)) {
-        numInput = parseInt(prompt('Too many pixels. Please renter amount of pixels per side. Max = 100'));
-    }
-    return numInput;
+//COLOR CONTROLS:-------------------------------------------------------------------
+//Color Picker Button:
+const colorPickerBtn = document.getElementById('color');
+colorPickerBtn.addEventListener('change', () => {
+    random = false;
+    darken = false;
+    lighten = false;
+    currentColor = document.getElementById('color').value;;
+});
+
+//Eraser Button:
+const eraserBtn = document.getElementById('eraser-btn');
+eraserBtn.addEventListener('click', () => {
+    random = false;
+    darken = false;
+    lighten = false;
+    currentColor = 'white';
+});
+
+//Random Color Button:
+const randomColorBtn = document.getElementById('random-color-btn');
+let random = false;
+randomColorBtn.addEventListener('click', () => {
+    darken = false;
+    lighten = false;
+    random = true;
+});
+
+function getRandomRGBColor() {
+    let r = Math.floor(Math.random() * 256);
+    let g = Math.floor(Math.random() * 256);
+    let b = Math.floor(Math.random() * 256);
+    return `rgb(${r}, ${g}, ${b})`;
 }
 
-function checkIfBelowMax(num, max) {
-    if (num <= max) {
-        return true;
-    } else return false;
-}
+//Lighten Color Button:
+const lightColorBtn = document.getElementById('lighten-btn');
+let lighten = false;
+lightColorBtn.addEventListener('click', () => {
+    random = false;
+    darken = false;
+    lighten = true;
+});
 
-//Coloring Board Options: ------------------------------------------------------------------------------------------
-function colorBoardEvent() {
-    const pixels = [...document.getElementsByClassName('pixel')];
-    console.log(pixels);
-
-    pixels.forEach(function(pixel) {
-        pixel.addEventListener('mouseenter', function(event) {
-            console.log(event.target);
-            pixel.style.backgroundColor = 'black';
-        });
-    });
-}
-
-//color picker - default black
-
-//random color Red: #fe5b63 Pink: #ff7cbb Yellow: #ffdb7c Green: #5bf495 Blue: #80b4ff Purple: #a580ff Gray: #5e5858
-
-//lighten
-
-//darken
+//Darken Color Button:
+const darkenColorBtn = document.getElementById('darken-btn');
+let darken = false;
+darkenColorBtn.addEventListener('click', () => {
+    random = false;
+    lighten = false;
+    darken = true;
+});

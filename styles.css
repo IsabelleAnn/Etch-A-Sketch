@@ -8,21 +8,107 @@ body {
     height: 100vh;
     background-color: rgb(29, 29, 29);
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px;
+}
+
+h1 {
+    color: gold;
+    font-size: 70px;
+    font-weight: normal;
+    font-family: 'Molle', cursive;
+}
+
+#container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(241, 55, 48);
+    padding: 30px;
+    border-radius: 20px;
 }
 
 #box-container {
-    border: solid red 2px;
+    border: solid rgb(245, 245, 245) 2px;
     overflow: hidden;
+    background-color: white;
 }
 
 #controls-container {
+    padding-right: 30px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+input[type='range'] {
+    margin: 10px;
+    cursor: pointer;
+    -webkit-appearance: none;
+    background-color: transparent;
+}
+
+input[type='range']::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
+    height: 10px;
+    border-radius: 25px;
+    background: black;
+}
+
+input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 25px;
+    margin-top: -8px;
+    background: gold;
+    border: black 2px solid;
+}
+
+#resize {
+    margin-bottom: 10px;
+}
+
+#grid-size-text,
+#resize {
+    text-align: center;
+    color: white;
 }
 
 .pixel {
     background-color: white;
-    border: solid 1px rgb(245, 245, 245);
+}
+
+input[type='color'] {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+    margin-left: 5px;
+}
+
+button {
+    cursor: pointer;
+    width: 100px;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border: none;
+    border-radius: 5px;
+    margin: 10px 5px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px;
+}
+
+#color-btn {
+    cursor: default;
 }
