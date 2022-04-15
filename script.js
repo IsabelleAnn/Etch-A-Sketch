@@ -13,15 +13,14 @@ generateDrawingBoard(gridSizeRangeValue);
 let pixels = [...document.getElementsByClassName('pixel')];
 pixels.forEach(function(pixel) {
     pixel.addEventListener('mouseenter', () => {
+        pixel.style.filter = `brightness(100%)`;
         if (random) {
-            pixel.style.filter = `brightness(100%)`;
             pixel.style.backgroundColor = getRandomRGBColor();;
         } else if (darken) {
             pixel.style.filter = `brightness(70%)`;
         } else if (lighten) {
             pixel.style.filter = `brightness(130%)`;
         } else {
-            pixel.style.filter = `brightness(100%)`;
             pixel.style.backgroundColor = currentColor;
         }
     });
@@ -47,6 +46,9 @@ function generateDrawingBoard(pixelsPerSide) {
 
 //----------Resizes Drawing Board-------------------------------------------
 gridSizeRange.addEventListener('change', () => {
+    random = false;
+    darken = false;
+    lighten = false;
     gridSizeRangeValue = gridSizeRange.value;
     gridSizeText.textContent = `${gridSizeRangeValue} X ${gridSizeRangeValue}`;
     currentColor = defaultColor;
@@ -56,15 +58,14 @@ gridSizeRange.addEventListener('change', () => {
     pixels = [...document.getElementsByClassName('pixel')];
     pixels.forEach(function(pixel) {
         pixel.addEventListener('mouseenter', () => {
+            pixel.style.filter = `brightness(100%)`;
             if (random) {
-                pixel.style.filter = `brightness(100%)`;
                 pixel.style.backgroundColor = getRandomRGBColor();;
             } else if (darken) {
                 pixel.style.filter = `brightness(70%)`;
             } else if (lighten) {
                 pixel.style.filter = `brightness(130%)`;
             } else {
-                pixel.style.filter = `brightness(100%)`;
                 pixel.style.backgroundColor = currentColor;
             }
         });
