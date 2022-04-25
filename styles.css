@@ -112,3 +112,8 @@ button {
 #color-btn {
     cursor: default;
 }
+
+#footer {
+    font-size: 15px;
+    margin-top: auto;
+}
