@@ -13,6 +13,7 @@ body {
     align-items: center;
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 20px;
+    padding-top: 20px;
 }
 
 h1 {
@@ -116,4 +117,6 @@ button {
 #footer {
     font-size: 15px;
     margin-top: auto;
+    color: white;
+    padding-bottom: 20px;
 }
