@@ -19,12 +19,12 @@ Part of The Odin Project Curriculum
   * git + Github
 
 ## Features:
-  * Player VS Player game mode with customizable player names
+  * Draw Using Pixels on Resizable Grid
 
-  * Intelligent AI game mode
+  * Change pixel color by using color-picker or continuously randomized colors
 
-  * Displays player's turn
+  * Erase colored pixels
 
-  * Announces winner
+  * Lighten or Darken Pixels
 
 
