@@ -19,12 +19,12 @@ Part of The Odin Project Curriculum
   * git + Github
 
 ## Features:
-  * Draw Using Pixels on Resizable Grid
+  * Draw using pixels on resizable grid
 
   * Change pixel color by using color-picker or continuously randomized colors
 
   * Erase colored pixels
 
-  * Lighten or Darken Pixels
+  * Lighten or darken pixels
 
 
